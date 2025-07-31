@@ -14,19 +14,19 @@
                 <header>
                     <div class="row">
                         <div class="logo">
-                            <a href="#" title="Bienvenue sur notre site">Bolonews</a>
+                            <a href="{{path('app_app')}}" title="Bienvenue sur notre site">Bolonews</a>
                         </div>
                         <nav>
                             <ul>
-                                <li><a href="#" title="Bienvenue sur notre page d'accueil">Home</a></li>
-                                <li><a href="#" title="Partez à la recherche d'une info">Articles</a></li>
+                                <li><a href="{{path('app_app')}}" title="Bienvenue sur notre page d'accueil">Home</a></li>
+                                <li><a href="{{path('app_search')}}" title="Partez à la recherche d'une info">Articles</a></li>
                                 <li><a href="#" title="Contactez-nous">Contact</a></li>
                             </ul>
                         </nav>
                         <div class="user-menu">
                             <ul>
                                 <li><a href="#" title="Mon espace">Mon espace</a></li>
-                                <li><a href="#" title="Me déconnecter">Me déconnecter</a></li>
+                                <li><a href="{{path('app_logout')}}" title="Me déconnecter">Me déconnecter</a></li>
                             </ul>
                         </div>
                     </div>
@@ -35,19 +35,19 @@
                 <header>
                     <div class="row">
                         <div class="logo">
-                            <a href="#" title="Bienvenue sur notre site">Bolonews</a>
+                            <a href="{{path('app_app')}}" title="Bienvenue sur notre site">Bolonews</a>
                         </div>
                         <nav>
                             <ul>
-                                <li><a href="#" title="Bienvenue sur notre page d'accueil">Home</a></li>
-                                <li><a href="#" title="Partez à la recherche d'une info">Articles</a></li>
+                                <li><a href="{{path('app_app')}}" title="Bienvenue sur notre page d'accueil">Home</a></li>
+                                <li><a href="{{path('app_search')}}" title="Partez à la recherche d'une info">Articles</a></li>
                                 <li><a href="#" title="Contactez-nous">Contact</a></li>
                             </ul>
                         </nav>
                         <div class="user-menu">
                             <ul>
-                                <li><a href="#" title="Se connecter">Se connecter</a></li>
-                                <li><a href="#" title="Rejoingnez notre communauté">M'inscrire</a></li>
+                                <li><a href="{{path('app_login')}}" title="Se connecter">Se connecter</a></li>
+                                <li><a href="{{path('app_register')}}" title="Rejoingnez notre communauté">M'inscrire</a></li>
                             </ul>
                         </div>
                     </div>
@@ -66,12 +66,12 @@
             {% endblock %}
             {% block recherche %}
             <div>
-                {{form_start(form, {'method': 'POST', 'attr': {'novalidate': 'novalidate'}})}}
+                <!--{{form_start(form, {'method': 'POST', 'attr': {'novalidate': 'novalidate'}})}}
                     {{form_widget(form.query)}}
                         <button type="submit">
                             <img src="" alt="">
                         </button>
-                {{ form_end(form) }}
+                {{ form_end(form) }}-->
             </div>
             <div class="trait"></div>
             <div class="list-categorie">

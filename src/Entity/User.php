@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -22,6 +23,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank(message: "Merci de remplir votre email.")]
     private ?string $email = null;
 
     /**
@@ -37,6 +39,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: "Ce champs ne peut pas etre vide.")]
+    #[Assert\Length(
+        min: 2,
+        max: 100,
+        minMessage: 'Ce champs doit contenir minimum {{ limit }} caratères.',
+        maxMessage: 'Ce champs doit contenir maximum {{ limit }} caratères.',
+    )]
     private ?string $pseudo = null;
 
     #[ORM\Column(length: 255, nullable: true)]

@@ -1,0 +1,61 @@
+# Exercice Bolonews
+
+*cet exercice servira d’évaluation sur le module mais ne vous mettez pas la pression, l’objectif premier est d’acquérir des compétences par la pratique, vous pouvez communiquer entre vous, me poser des questions etc…* 
+
+## Lien vers la maquette figma
+
+La maquette proposée vous donnée une idée de la mise en page et un début de parcours utilisateur, vous pouvez bien sur vous en éloigner.
+
+https://www.figma.com/design/sKB9p4TxF6S6XjRhPBFLEO/Blog?node-id=69-675&t=zxVQQQrkz1osHE0U-1
+
+https://www.figma.com/design/sKB9p4TxF6S6XjRhPBFLEO/Blog?node-id=0-1&t=t0c9sLi8CnyTSY2w-0
+
+## Avant de commencer :
+
+imaginez le modèle de données de l’application a l’aide de la maquette et des informations suivantes
+
+Réflechissez au schéma d’ergonomie de votre application, en bref utilisez la méthodologie acquise lors du module php pour préparer votre travail en amont du développement. 
+
+un article possède un titre, un chapeau, un contenu texte, une image d’illustration, un auteur, une date de création et une date de modification, un nombre de likes, des commentaires, une catégorie et un champs publié pour publier/ dépublier un article.
+
+Une catégorie se repère par son libelle
+
+Un utilisateur a un identifiant (email) son mot de passe pour se connecter, un pseudo, un rôle
+
+Un commentaire comporte une date de publication et un contenu textuel, et bien entendu un auteur. 
+
+Un utilisateur non connecté peut lire des articles et utiliser les fonctionnalités de recherches avancées (a minima par mot clé dans le titre et le chapeau, grâce a la barre de recherche) 
+
+Un utilisateur connecté peut en plus créer , publier / depublier, un article, modifier/eventuellement supprimer ses propres articles*
+
+🚗**Aller plus loin:** 
+
+1️⃣Un administrateur peut supprimer n’importe quel article , ou le dépublier , supprimer / bannir un utilisateur et dispose de toute les fonctionnalités d’un utilisateur connecté
+
+2️⃣Un utilisateur connecté peut liker (ou enlever son like) sur un article et ajouter un commentaire
+
+<aside>
+⚠️ Faites vérifier votre modèle de données si vous n’êtes pas sur 🙂, ne perdez pas trop de temps sur le css faites juste une mise en page propre et lisible, vous aurez tout le loisir d’y revenir dessus
+
+</aside>
+
+## Créer le projet avec Symfony
+
+vous utiliserez doctrine, les commandes make pour les contrôleurs, user, entité ainsi que pour la gestion du register/ login/ logout
+
+<aside>
+⚠️ Vous n’utiliserez pas les commandes automatiques pour le CRUD des articles, vous pourrez l’utiliser pour la partie administration (gestion des catégories, des utilisateurs ) pour ceux qui poussent l’exercice jusque là
+
+</aside>
+
+Commencez par créer l’entité User, avec un système de création de compte et connexion
+
+cela nous permettra à la création d’un article d’utiliser comme auteur l’utilisateur connecté ! 
+
+Consigner toute votre démarche, vos schémas et votre réflexion sur des documents au format de votre choix (miro, figma, notion etc…). Ne partez pas tête baissée dans le code, faite un plan d’attaque ! 
+
+## Good Luck 💪
+
+Utilisateur:
+email: kris@gmail.com
+mdp: azerty

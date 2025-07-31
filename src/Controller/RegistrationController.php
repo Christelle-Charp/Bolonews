@@ -21,6 +21,24 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //On recupère l'image issu du formulaire
+            $imageFile = $form->get('photo')->getData();
+
+            //Si une image a bien été uploadé
+            if($imageFile){
+                //On donne un nom de fichier à l'image avec uniqid pour avoir un nom unique
+                // et on ajoute l'extansion devinée avec la fonction guessExtension()
+                $fileName = uniqid(). '.' . $imageFile->guessExtension();
+                //On envoi le fichier dans le dossier prévu pour les images
+                $imageFile->move(
+                    $this->getParameter('images_directory').'user/',
+                    $fileName);
+                    
+            };
+            //On enregistre le nom du fichier dans l'entité produit
+            $user->setPhoto($fileName);
+
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
