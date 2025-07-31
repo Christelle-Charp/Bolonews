@@ -2,13 +2,15 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\Categorie;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ArticleType extends AbstractType
 {
@@ -18,7 +20,20 @@ class ArticleType extends AbstractType
             ->add('titre')
             ->add('chapeau')
             ->add('contenu')
-            ->add('image')
+            ->add('image', FileType::class, [
+                'label'=> 'Votre image',
+                'mapped'=> 'false',
+                'required'=> 'false',
+                'constraints'=> [
+                    new File([
+                        'maxSize' => '3000k',
+                        'mimeTypes'=> [
+                            'image/*'
+                        ],
+                        'mimeTypesMessage'=> "Merci de télécharger l'illustration de votre article"
+                    ])
+                ]
+            ])
             ->add('creation', null, [
                 'widget' => 'single_text',
             ])
