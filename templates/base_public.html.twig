@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        {% endblock %}
+    </head>
+    <body>
+        {% block header %}
+            {% if app.user %}
+                <header>
+                    <div class="row">
+                        <div class="logo">
+                            <a href="#" title="Bienvenue sur notre site">Bolonews</a>
+                        </div>
+                        <nav>
+                            <ul>
+                                <li><a href="#" title="Bienvenue sur notre page d'accueil">Home</a></li>
+                                <li><a href="#" title="Partez à la recherche d'une info">Articles</a></li>
+                                <li><a href="#" title="Contactez-nous">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <div class="user-menu">
+                            <ul>
+                                <li><a href="#" title="Mon espace">Mon espace</a></li>
+                                <li><a href="#" title="Me déconnecter">Me déconnecter</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+            {% else %}
+                <header>
+                    <div class="row">
+                        <div class="logo">
+                            <a href="#" title="Bienvenue sur notre site">Bolonews</a>
+                        </div>
+                        <nav>
+                            <ul>
+                                <li><a href="#" title="Bienvenue sur notre page d'accueil">Home</a></li>
+                                <li><a href="#" title="Partez à la recherche d'une info">Articles</a></li>
+                                <li><a href="#" title="Contactez-nous">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <div class="user-menu">
+                            <ul>
+                                <li><a href="#" title="Se connecter">Se connecter</a></li>
+                                <li><a href="#" title="Rejoingnez notre communauté">M'inscrire</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+            {% endif %}
+        {% endblock %}
+        <main>
+            {% block titre %}
+            <section class="titre">
+                <div class="row">
+                    <h1>Bolonews</h1>
+                    <p class="sous-titre">Les meilleures sauces pour les pâtes et de l’acualité sur le grill</p>
+                    <div class="trait"></div>
+                </div>
+            </section>
+            {% endblock %}
+            {% block recherche %}
+            <div>
+                {{form_start(form, {'method': 'POST', 'attr': {'novalidate': 'novalidate'}})}}
+                    {{form_widget(form.query)}}
+                        <button type="submit">
+                            <img src="" alt="">
+                        </button>
+                {{ form_end(form) }}
+            </div>
+            <div class="trait"></div>
+            <div class="list-categorie">
+                <ul>
+                    <li></li>
+                </ul>
+            </div>
+            {% endblock %}
+            {% block body %}{% endblock %}
+        </main>
+        
+    </body>
+</html>
