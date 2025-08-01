@@ -45,7 +45,7 @@ class Article
     private ?Categorie $categorie = null;
 
     #[ORM\Column]
-    private ?bool $parution = null;
+    private ?bool $parution = false;    //Je le passe à false plutot de null
 
     /**
      * @var Collection<int, User>

@@ -4,4 +4,88 @@
 {% block recherche %}{% endblock %}
 
 {% block body %}
+    <h3>Laissez votre inspiration parler</h3>
+    <div class="container-form">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="champs">
+            <!-- label -->
+            {{form_label(form.titre)}}
+            <!-- input -->
+            {{ form_widget(form.titre, {
+                "attr": {'class': "input" ~ (form.titre.vars.errors|length >0 ? "input-error" : '') }
+            }) }}
+            <!-- Messages d'erreurs -->
+            <div class="error">
+            {{form_errors(form.titre)}}
+            </div>
+        </div>
+
+        <div class="champs">
+            <!-- label -->
+            {{form_label(form.chapeau)}}
+            <!-- input -->
+            {{ form_widget(form.chapeau, {
+                "attr": {'class': "input" ~ (form.chapeau.vars.errors|length >0 ? "input-error" : '') }
+            }) }}
+            <!-- Messages d'erreurs -->
+            <div class="error">
+            {{form_errors(form.chapeau)}}
+            </div>
+        </div>
+
+        <div class="champs">
+            <!-- label -->
+            {{form_label(form.contenu)}}
+            <!-- input -->
+            {{ form_widget(form.contenu, {
+                "attr": {'class': "input" ~ (form.contenu.vars.errors|length >0 ? "input-error" : '') }
+            }) }}
+            <!-- Messages d'erreurs -->
+            <div class="error">
+            {{form_errors(form.contenu)}}
+            </div>
+        </div>
+
+        <div class="champs">
+            <!-- label -->
+            {{form_label(form.categorie)}}
+            <!-- input -->
+            {{ form_widget(form.categorie, {
+                "attr": {'class': "input" ~ (form.categorie.vars.errors|length >0 ? "input-error" : '') }
+            }) }}
+            <!-- Messages d'erreurs -->
+            <div class="error">
+            {{form_errors(form.categorie)}}
+            </div>
+        </div>
+
+        <div class="champs">
+            <!-- label -->
+            {{form_label(form.image)}}
+            <!-- input -->
+            {{ form_widget(form.image, {
+                "attr": {'class': "input" ~ (form.image.vars.errors|length >0 ? "input-error" : '') }
+            }) }}
+            <!-- Messages d'erreurs -->
+            <div class="error">
+            {{form_errors(form.image)}}
+            </div>
+        </div>
+
+        <div class="champs">
+            <!-- label -->
+            {{ form_label(form.parution, null, { 'label_attr': { 'class': 'form-check-label' } }) }}
+            <!-- input -->
+            {{ form_widget(form.parution, {
+                "attr": {'class': "input" ~ (form.parution.vars.errors|length >0 ? "input-error" : '') }
+            }) }}
+            <!-- Messages d'erreurs -->
+            <div class="error">
+            {{form_errors(form.parution)}}
+            </div>
+        </div>
+    
+        <input type="submit" value="Enregistrer" class="primary-btn">
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

@@ -40,6 +40,7 @@ final class ArticleController extends AbstractController
     #[Route('/article/create', name: 'article_create')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
+        $user = $this->getUser();
         //J'instancie un article vide
         $article = new Article();
 
@@ -48,7 +49,7 @@ final class ArticleController extends AbstractController
 
         //Je charge l'objet $article et l'objet $form avec les informations récupérées en post
         $form->handleRequest($request);
-
+    
         //Je vérifie si le formulaire a bien été soumis et validé
         if($form->isSubmitted() && $form->isValid()){
             //On récupère l'image  issu du formulaire
@@ -68,9 +69,15 @@ final class ArticleController extends AbstractController
             //On enregistre le nom du fichier dans l'entité Article
             $article->setImage($fileName);
 
+            //On enregistre la date et l'heure de la creation:
+            $article->setCreation(new \DateTimeImmutable());
+            //On ajoute l'auteur
+            $article->setAuteur($user);
+
             //Je mets la requete crée avec les infos du formulaire en file d'attente
             $em->persist($article);
             //Je mets à jour la BDD avec la requete qui est en attente
+            
             $em->flush();
 
             //Je crée un message flash: "L'article a bien été crée"
@@ -117,10 +124,15 @@ final class ArticleController extends AbstractController
                 $imageFile->move(
                     $this->getParameter('images_directory').'article/',
                     $fileName);
+
+                //On enregistre le nom du fichier dans l'entité Article
+                $article->setImage($fileName);
             }
 
-            //On enregistre le nom du fichier dans l'entité Article
-            $article->setImage($fileName);
+            
+
+            //On ajoute la date de modification:
+            $article->setModification(new \DateTime());
 
             //Je mets la requete crée avec les infos du formulaire en file d'attente
             $em->persist($article);
