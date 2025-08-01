@@ -1,0 +1,44 @@
+<!-- Template de fragment pour les cards Article
+a besoin d'un article-->
+<div class="card">
+    <div class="column-30">
+        <img src="{{asset('images/article/' ~ article.image)}}" alt="Illustration de l'article {{article.titre}}">
+    </div>
+    <div class="column-65">
+        <div class="encart">
+            <div class="card-top">
+                <p class="etiquette">{{article.categorie.nom}}</p>
+                {% if app.user and app.user == article.auteur %}
+                    <a href="{{path('article_update', {id: article.id})}}" title="Modifier l'article" class="primary-btn">Editer</a>
+                {% endif %}
+                
+            </div>
+            <div class="card-head">
+                <h4>{{article.titre}}</h4>
+                <p class="sous-titre">{{article.auteur.pseudo}}</p>
+            </div>
+            <div class="card-date">
+                <p>{{ (article.modification ?? article.creation)|date('d F Y à H\hi') }}</p>
+            </div>                          
+            <p class="chapeau">{{article.chapeau}}</p>
+            <div class="cta">
+                <a href="{{path('article_show', {id:article.id})}}" title="En savoir plus sur {{article.titre}}">
+                    <p>Lire la suite</p>
+                    {{ ux_icon('ph:arrow-right-duotone',{'class': "pictos"}) }}
+                </a>
+            </div>
+            <div class="info-article">
+                <div class="avis">
+                    <div class="commentaire">
+                        {{ ux_icon('ph:chat-circle-dots', {'class': "pictos"}) }}
+                        <p>nbre de commentaire</p>
+                    </div>
+                    <div class="like">
+                        {{ ux_icon('ph:heart',{'class': "pictos"}) }}
+                        <p>nbre de like</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
