@@ -28,14 +28,7 @@ final class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/article/show/{id}', name: 'article_show')]
-    public function show(Article $article): Response
-    {
-        //Afficher un article en l'appelant par son id
-        return $this->render('article/show.html.twig', [
-            'article' => $article,
-        ]);
-    }
+    
 
     #[Route('/article/create', name: 'article_create')]
     public function create(Request $request, EntityManagerInterface $em): Response

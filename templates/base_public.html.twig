@@ -66,12 +66,12 @@
             {% endblock %}
             {% block recherche %}
             <div>
-                <!--{{form_start(form, {'method': 'POST', 'attr': {'novalidate': 'novalidate'}})}}
+                {{form_start(form, {'method': 'POST', 'attr': {'novalidate': 'novalidate'}})}}
                     {{form_widget(form.query)}}
                         <button type="submit">
-                            <img src="" alt="">
+                            {{ ux_icon('ph:magnifying-glass', {'class': "pictos"}) }}
                         </button>
-                {{ form_end(form) }}-->
+                {{ form_end(form) }}
             </div>
             <div class="trait"></div>
             <div class="list-categorie">

@@ -1,7 +1,6 @@
 {% extends 'base_public.html.twig' %}
 
 {% block title %}Accueil{% endblock %}
-{% block recherche %}{% endblock %}
 
 {% block body %}
     <section class="banner">
@@ -9,7 +8,10 @@
             <div class="row">
                 <h3>Résultat de votre recherche</h3>
                 <div class="container-card">
-                    <div class="card">
+                    {% for article in articles %}
+                        {% include "fragment/_cardArticle.html.twig" %}
+                    {% endfor %}
+                    <!--<div class="card">
                         <div class="column-30">
                             <img src="" alt="">
                         </div>
@@ -44,7 +46,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>

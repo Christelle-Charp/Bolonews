@@ -55,4 +55,34 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function listAutorisee(): array
+        //Role: Récupérer tous les articles qui ont un statut true pour l'attribut parution
+        //Parametre: Neant
+        //Retour: Un tableau d'objet contenant les articles
+    {
+        return $this->createQueryBuilder('a')   //Alias de l'entité concerné par la recherche (article)
+            
+            ->Where('a.parution = true')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findBySearch(string $search): array
+    {   //Role: Récupérer tous les articles qui contient les infos de recherches
+        //Parametre: $search
+        //Retour: Un tableau d'objet contenant les articles
+        return $this->createQueryBuilder('a')   //Alias de l'entité concerné par la recherche (article)
+            ->leftJoin('a.categorie', 'c') // Jointure avec l'entité liée
+            ->leftJoin('a.auteur', 'au')
+            ->where('a.titre LIKE :search' )
+            ->orWhere('a.chapeau LIKE :search')
+            ->orWhere('a.contenu LIKE :search')
+            ->orWhere('c.nom LIKE :search' )
+            ->orWhere('au.pseudo LIKE :search' )
+            ->andWhere('a.parution = true')
+            ->setParameter('search', '%' . $search . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -1,0 +1,36 @@
+{% extends 'base_public.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+{% block recherche %}{% endblock %}
+
+{% block body %}
+    <section class="lecture-article">
+        <div class="row">
+            <p class="etiquette">{{article.categorie.nom}}</p>
+            <h3>{{article.titre}}</h3>
+            <p>{{ (article.modification ?? article.creation)|date('d F Y à H\hi') }}</p>
+            <p class="chapeau">{{article.chapeau}}</p>
+            <div class="article-img">
+                <img src="{{asset('images/article/' ~ article.image)}}" alt="Illustration de l'article {{article.titre}}">
+            </div>
+            <p class="contenu">{{article.contenu}}</p>
+            <div class="footer-article">
+                <div class="auteur">
+                    <img src="{{asset('images/user/' ~ article.auteur.photo)}}" alt="Photo de {{article.auteur.pseudo}}">
+                    <p class="auteur">{{article.auteur.pseudo}}</p>
+                </div>
+                <div class="avis">
+                    <div class="commentaire">
+                        {{ ux_icon('ph:chat-circle-dots', {'class': "pictos"}) }}
+                        <p>nbre de commentaire</p>
+                    </div>
+                    <div class="like">
+                        {{ ux_icon('ph:heart',{'class': "pictos"}) }}
+                        <p>nbre de like</p>
+                    </div>
+                </div>
+            </div>
+            <div class="trait"></div>
+        </div>
+    </section>
+{% endblock %}
