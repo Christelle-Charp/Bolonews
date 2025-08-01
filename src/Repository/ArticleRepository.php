@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Article;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Article>
@@ -40,4 +41,18 @@ class ArticleRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function listByPublicationStatus(User $user, bool $statut): array
+        //Role: Récupérer tous les articles de l'utilisateur connecté selon leur statut publié ou non
+        //Parametre: id de l'Utilisateur connecté
+        //Retour: Un tableau d'objet contenant les articles
+    {
+        return $this->createQueryBuilder('a')   //Alias de l'entité concerné par la recherche (article)
+            ->where('a.auteur = :user' )
+            ->andWhere('a.parution = :statut')
+            ->setParameter('user', $user)
+            ->setParameter('statut', $statut)
+            ->getQuery()
+            ->getResult();
+    }
 }

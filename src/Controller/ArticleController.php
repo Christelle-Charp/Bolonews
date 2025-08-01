@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
@@ -18,9 +19,21 @@ final class ArticleController extends AbstractController
     #[Route('/article', name: 'article_index')]
     public function index(ArticleRepository $articleRepository, Request $request): Response
     {
-        $articles = $articleRepository->findAll();
+        $user = $this->getUser();
+        $articlesPublies = $articleRepository->listByPublicationStatus($user, true);
+        $articlesNonPublies = $articleRepository->listByPublicationStatus($user, false);
         return $this->render('article/index.html.twig', [
-            'articles' => $articles,
+            'articlesPublies' => $articlesPublies,
+            'articlesNonPublies' => $articlesNonPublies,
+        ]);
+    }
+
+    #[Route('/article/show/{id}', name: 'article_show')]
+    public function show(Article $article): Response
+    {
+        //Afficher un article en l'appelant par son id
+        return $this->render('article/show.html.twig', [
+            'article' => $article,
         ]);
     }
 
