@@ -72,6 +72,12 @@ final class AppController extends AbstractController
     #[Route('/show/{id}', name: 'app_show')]
     public function show(Article $article, Request $request, EntityManagerInterface $em): Response
     {
+        //si l'utilisateur tape l'id d'un article dans l'url, je vérifie si le statut de l'article autorise la publication
+        //Si l'article n'est pas publié, je renvoie à la page de recherche
+        if(!$article->isParution()){
+            return $this->redirectToRoute('app_search');
+        }
+
         //J'instancie un nouveau commenataire pour appeller le formulaire de commentaire
         $commentaire = new Commentaire(); 
         $commentaire->setArticle($article);

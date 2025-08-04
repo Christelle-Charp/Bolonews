@@ -5,50 +5,56 @@
 
 {% block body %}
     <section class="lecture-article">
-        <div class="row">
-            <p class="etiquette">{{article.categorie.nom}}</p>
-            <h3>{{article.titre}}</h3>
-            <p>{{ (article.modification ?? article.creation)|date('d F Y à H\hi') }}</p>
-            <p class="chapeau">{{article.chapeau}}</p>
-            <div class="article-img">
-                <img src="{{asset('images/article/' ~ article.image)}}" alt="Illustration de l'article {{article.titre}}">
-            </div>
-            <p class="contenu">{{article.contenu}}</p>
-            <div class="footer-article">
-                <div class="auteur">
-                    <img src="{{asset('images/user/' ~ article.auteur.photo)}}" alt="Photo de {{article.auteur.pseudo}}">
-                    <p class="auteur">{{article.auteur.pseudo}}</p>
+        <div class="container">
+            <div class="row">
+                <p class="etiquette">{{article.categorie.nom}}</p>
+                <h3>{{article.titre}}</h3>
+                <p>{{ (article.modification ?? article.creation)|date('d F Y à H\hi') }}</p>
+                <p class="chapeau">{{article.chapeau}}</p>
+                <div class="article-img">
+                    <img src="{{asset('images/article/' ~ article.image)}}" alt="Illustration de l'article {{article.titre}}">
                 </div>
-                <div class="avis">
-                    <div class="commentaire">
-                        {{ ux_icon('ph:chat-circle-dots', {'class': "pictos"}) }}
-                        <p>nbre de commentaire</p>
+                <p class="contenu">{{article.contenu}}</p>
+                <div class="footer-article">
+                    <div class="auteur">
+                        <img src="{{asset('images/user/' ~ article.auteur.photo)}}" alt="Photo de {{article.auteur.pseudo}}">
+                        <p class="auteur">{{article.auteur.pseudo}}</p>
                     </div>
-                    <div class="like">
-                        {{ ux_icon('ph:heart',{'class': "pictos"}) }}
-                        <p>nbre de like</p>
+                    <div class="avis">
+                        <div class="commentaire">
+                            {{ ux_icon('ph:chat-circle-dots', {'class': "pictos"}) }}
+                            <p>{{article.commentaires|length}}</p>
+                        </div>
+                        <div class="like">
+                            {{ ux_icon('ph:heart',{'class': "pictos"}) }}
+                            <p>nbre de like</p>
+                        </div>
                     </div>
                 </div>
+                
             </div>
-            <div class="trait"></div>
-        </div>
+        </div>    
     </section>
+    <div class="trait"></div>
     {% if app.user %}
         <section class="commentaires">
-            <div class="row">
-                <h4>Commentaires</h4>
-                <div class="contenair-avis">
-                    {% for commentaire in commentaires %}
-                        {% include "fragment/_cardCommentaire.html.twig" %}
-                    {% endfor %}
-                </div>
-                <div class="form-commentaire">
-                    {{ form_start(form) }}
-                    {{ form_widget(form) }}
-                    <button class="primary-btn" type="submit">Ajouter</button>
-                    {{ form_end(form) }}
+            <div class="container">
+                <div class="row">
+                    <h4>Commentaires</h4>
+                    <div class="container-avis">
+                        {% for commentaire in commentaires %}
+                            {% include "fragment/_cardCommentaire.html.twig" %}
+                        {% endfor %}
+                    </div>
+                    <div class="form-commentaire">
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <button class="primary-btn" type="submit">Ajouter</button>
+                        {{ form_end(form) }}
+                    </div>
                 </div>
             </div>
+            
         </section>
     {% else %}
         <p><a href="{{ path('app_login') }}">Connectez-vous</a> pour laisser un commentaire.</p>

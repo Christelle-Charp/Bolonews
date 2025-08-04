@@ -7,8 +7,8 @@
         <div class="container">
             <div class="row">
                 <h3>A la Une!</h3>
-                <div class="card-une">
-                    <a href="{{path('app_show', {id:articleUne.id})}}" title="En savoir plus sur {{articleUne.titre}}">
+                <a href="{{path('app_show', {id:articleUne.id})}}" title="En savoir plus sur {{articleUne.titre}}">
+                    <div class="card-une">
                         <div class="column-45">
                             <img src="{{asset('images/article/' ~ articleUne.image)}}" alt="Illustration de l'article {{articleUne.titre}}">
                         </div>
@@ -18,11 +18,13 @@
                                 <h2>{{articleUne.titre}}</h2>
                                 <p class="chapeau">{{articleUne.chapeau}}</p>
                                 <div class="auteur">
-                                    <img src="{{asset('images/user/' ~ articleUne.auteur.photo)}}" alt="Photo de {{articleUne.auteur.pseudo}}">
+                                    <div class="photo">
+                                         <img src="{{asset('images/user/' ~ articleUne.auteur.photo)}}" alt="Photo de {{articleUne.auteur.pseudo}}">
+                                    </div>
                                     <p>{{articleUne.auteur.pseudo}}</p>
                                 </div>
                                 <div class="info-article">
-                                    <p>{{ (articleUne.modification ?? articleUne.creation)|date('d F Y à H\hi') }}</p>
+                                    <p>publié le {{ (articleUne.modification ?? articleUne.creation)|date('d F Y à H\hi') }}</p>
                                     <div class="avis">
                                         <div class="commentaire">
                                             {{ ux_icon('ph:chat-circle-dots', {'class': "pictos"}) }}
@@ -36,8 +38,8 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a> 
             </div>
         </div>
     </section>

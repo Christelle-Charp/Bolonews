@@ -91,7 +91,10 @@ final class ArticleController extends AbstractController
     #[Route('/article/update/{id}', name: 'article_update')]
     public function update(Request $request, EntityManagerInterface $em, Article $article): Response
     {
-        
+        //Je vérifier si l'utilisateur connecté est bien l'auteur de l'article sinon je renvoie sur la page mon espace
+        if($article->getAuteur() !== $this->getUser()){
+            return $this->redirectToRoute('article_index');
+        }
         //Je crée le formulaire qui a pour base Article:
         $form = $this->createForm(ArticleType::class, $article);
 

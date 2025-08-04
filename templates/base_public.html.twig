@@ -65,7 +65,7 @@
             </section>
             {% endblock %}
             {% block recherche %}
-            <div>
+            <div class="search-bar">
                 {{form_start(form, {'method': 'POST', 'attr': {'novalidate': 'novalidate'}})}}
                     {{form_widget(form.query)}}
                         <button type="submit">
@@ -77,7 +77,7 @@
             <div class="list-categorie">
                 <ul>
                     {% for categorie in categories %}
-                        <li>
+                        <li class="etiquette">
                             <a href="{{path('app_search', {'idCategorie': categorie.id})}}">
                                 {{categorie.nom}}
                             </a>
@@ -87,11 +87,9 @@
                 </ul>
             </div>
             {% endblock %}
-            <div class="contenair">
-                <div class="row">
-                    {% block body %}{% endblock %}
-                </div>
-            </div>
+            
+            {% block body %}{% endblock %}
+            
         </main>
         
     </body>
