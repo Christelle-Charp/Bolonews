@@ -25,9 +25,9 @@
                             {{ ux_icon('ph:chat-circle-dots', {'class': "pictos"}) }}
                             <p>{{article.commentaires|length}}</p>
                         </div>
-                        <div class="like">
+                        <div class="like" data-id="{{article.id}}">
                             {{ ux_icon('ph:heart',{'class': "pictos"}) }}
-                            <p>nbre de like</p>
+                            <p id="like-count">{{article.likes|length}}</p>
                         </div>
                     </div>
                 </div>

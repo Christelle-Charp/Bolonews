@@ -91,6 +91,8 @@
             {% block body %}{% endblock %}
             
         </main>
-        
+        {% block javascripts %}
+            <script src="{{asset('js/scripts.js')}}"></script>
+        {% endblock %}
     </body>
 </html>
