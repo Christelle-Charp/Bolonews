@@ -17,10 +17,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class AppController extends AbstractController
 {
     #[Route('/', name: 'app_app')]
-    public function index(): Response
+    public function index(ArticleRepository $articleRepository): Response
     {
+        //Je récupère l'article le plus commenté pour la une:
+        $articleUne = $articleRepository->findArticlePlusCommente();
+        //Je récupère les 4 articles paru le + récemment:
+        $articles = $articleRepository->findQuatreArticles();
         return $this->render('app/index.html.twig', [
-            'controller_name' => 'AppController',
+            'articleUne' => $articleUne,
+            'articles' => $articles,
         ]);
     }
 

@@ -86,7 +86,8 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByCategorie(string $categorie) : array {
+    public function findByCategorie(string $categorie) : array 
+    {
         //Role: Récupérer tous les articles d'une categorie
         //Parametre: $categorie qui est la categorie recherché
         //Retour: un tableau d'articles
@@ -98,5 +99,37 @@ class ArticleRepository extends ServiceEntityRepository
             ->setParameter('categorie', $categorie)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findArticlePlusCommente() : ?Article
+    {
+        //Role: récupérer l'article qui a le plus de commentaire (on pourrait rajouter un critère de plus sur la date de création)
+        //Parametre: Néant
+        //Retour: un objet article
+
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.commentaires', 'c')   //Jointure avec l'entity liée
+            ->Where('a.parution = true')
+            ->addSelect('COUNT(c.id) AS HIDDEN nbCommentaires') //Je compte le nombre de commentaire et j'appelle le nbCommentaire. HIDDEN est utilisé car nbCommentaire n'est pas un attribut de mon objet
+            ->groupBy('a.id')   //On groupe les commentaires par l'id de l'article
+            ->orderBy('nbCommentaires', 'DESC') // On trie les articles qui + commenté au - commenté
+            ->setMaxResults(1) // Je ne veux qu'un seul résultat, l'article le + commenté
+            ->getQuery()    //J'execute la requete
+            ->getOneOrNullResult(); // je recupere un seul objet
+
+
+    }
+
+    public function findQuatreArticles() : array
+    {
+        //Role: Récupérer les 4 articles publiés en dernier
+        //Parametre: Néant
+        //Retour: un tableau d'objet contenant 4 article
+        return $this->createQueryBuilder('a')
+            ->Where('a.parution = true')
+            ->orderBy('a.creation', 'DESC') // On trie les articles par la date de création
+            ->setMaxResults(4) // Je ne veux que 4 articles
+            ->getQuery()    //J'execute la requete
+            ->getResult(); // je recupere un tableau contenant 4 articles
     }
 }

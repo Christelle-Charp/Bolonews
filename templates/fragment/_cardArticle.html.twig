@@ -22,7 +22,7 @@ a besoin d'un article-->
             </div>                          
             <p class="chapeau">{{article.chapeau}}</p>
             <div class="cta">
-                <a href="{{path('article_show', {id:article.id})}}" title="En savoir plus sur {{article.titre}}">
+                <a href="{{path('app_show', {id:article.id})}}" title="En savoir plus sur {{article.titre}}">
                     <p>Lire la suite</p>
                     {{ ux_icon('ph:arrow-right-duotone',{'class': "pictos"}) }}
                 </a>
@@ -31,7 +31,7 @@ a besoin d'un article-->
                 <div class="avis">
                     <div class="commentaire">
                         {{ ux_icon('ph:chat-circle-dots', {'class': "pictos"}) }}
-                        <p>nbre de commentaire</p>
+                        <p>{{article.commentaires|length}}</p>
                     </div>
                     <div class="like">
                         {{ ux_icon('ph:heart',{'class': "pictos"}) }}

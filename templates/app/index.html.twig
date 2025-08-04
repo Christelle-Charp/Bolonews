@@ -8,28 +8,28 @@
             <div class="row">
                 <h3>A la Une!</h3>
                 <div class="card-une">
-                    <a href="#" title="">
+                    <a href="{{path('app_show', {id:articleUne.id})}}" title="En savoir plus sur {{articleUne.titre}}">
                         <div class="column-45">
-                            <img src="" alt="">
+                            <img src="{{asset('images/article/' ~ articleUne.image)}}" alt="Illustration de l'article {{articleUne.titre}}">
                         </div>
                         <div class="column-45">
                             <div class="encart-une">
-                                <p class="etiquette">La categorie</p>
-                                <h2>titre de l'article</h2>
-                                <p class="chapeau">chapeau de l'article</p>
+                                <p class="etiquette">{{articleUne.categorie.nom}}</p>
+                                <h2>{{articleUne.titre}}</h2>
+                                <p class="chapeau">{{articleUne.chapeau}}</p>
                                 <div class="auteur">
-                                    <img src="" alt="">
-                                    <p>pseudo de l'auteur</p>
+                                    <img src="{{asset('images/user/' ~ articleUne.auteur.photo)}}" alt="Photo de {{articleUne.auteur.pseudo}}">
+                                    <p>{{articleUne.auteur.pseudo}}</p>
                                 </div>
                                 <div class="info-article">
-                                    <p>date réation ou modification</p>
+                                    <p>{{ (articleUne.modification ?? articleUne.creation)|date('d F Y à H\hi') }}</p>
                                     <div class="avis">
                                         <div class="commentaire">
-                                            <img src="" alt="">
-                                            <p>nbre de commentaire</p>
+                                            {{ ux_icon('ph:chat-circle-dots', {'class': "pictos"}) }}
+                                            <p>{{articleUne.commentaires|length}}</p>
                                         </div>
                                         <div class="like">
-                                            <img src="" alt="">
+                                            {{ ux_icon('ph:heart',{'class': "pictos"}) }}
                                             <p>nbre de like</p>
                                         </div>
                                     </div>
@@ -46,7 +46,10 @@
             <div class="row">
                 <h3>Dernières parutions</h3>
                 <div class="container-card">
-                    <div class="card">
+                    {% for article in articles %}
+                        {% include "fragment/_cardArticle.html.twig" %}
+                    {% endfor %}
+                    <!--<div class="card">
                         <div class="column-30">
                             <img src="" alt="">
                         </div>
@@ -81,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
