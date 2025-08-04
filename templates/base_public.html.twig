@@ -76,7 +76,14 @@
             <div class="trait"></div>
             <div class="list-categorie">
                 <ul>
-                    <li></li>
+                    {% for categorie in categories %}
+                        <li>
+                            <a href="{{path('app_search', {'idCategorie': categorie.id})}}">
+                                {{categorie.nom}}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    
                 </ul>
             </div>
             {% endblock %}

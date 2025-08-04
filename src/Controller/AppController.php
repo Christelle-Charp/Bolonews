@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\SearchType;
 use App\Repository\ArticleRepository;
+use App\Repository\CategorieRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -20,14 +21,26 @@ final class AppController extends AbstractController
         ]);
     }
 
-    #[Route('/search', name: 'app_search')]
-    public function search(ArticleRepository $articleRepository, Request $request): Response
+    #[Route('/search/{idCategorie}', name: 'app_search', defaults: ['idCategorie' => null])]
+    public function search(ArticleRepository $articleRepository, CategorieRepository $categorieRepository, Request $request, ?int $idCategorie=null): Response
     {
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
+        //Je récupère un tableau avec toutes mes categories
+        $categories = $categorieRepository->findAll();
+
         //J'initialise mon tableau avec tous les article
         $articles = $articleRepository->listAutorisee();
+
+        //Je fais la recherche par catégorie 
+        if($idCategorie){
+            $categorie = $categorieRepository->find($idCategorie);
+            if($categorie){
+                $articles = $articleRepository->findByCategorie($categorie->getNom());
+            }
+            
+        }
 
         if($form->isSubmitted() && $form->isValid()){
             $searchData = $form->get('query')->getData();
@@ -43,6 +56,7 @@ final class AppController extends AbstractController
 
         return $this->render('app/search.html.twig', [
             'articles' => $articles,
+            'categories' => $categories,
             'form' => $form->createView(),  // Nécessaire pour afficher le form de recherche
         ]);
     }

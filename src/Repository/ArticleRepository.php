@@ -85,4 +85,18 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findByCategorie(string $categorie) : array {
+        //Role: Récupérer tous les articles d'une categorie
+        //Parametre: $categorie qui est la categorie recherché
+        //Retour: un tableau d'articles
+
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.categorie', 'c') // Jointure avec l'entité liée
+            ->Where('c.nom = :categorie' )
+            ->andWhere('a.parution = true')
+            ->setParameter('categorie', $categorie)
+            ->getQuery()
+            ->getResult();
+    }
 }
