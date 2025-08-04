@@ -1,0 +1,12 @@
+<!-- Template de fragment pour les cards Commenatire
+a besoin d'un commentaire-->
+<div class="card-commentaire">
+    <div class="header-card-commentaire">
+        <div class="auteur">
+            <img src="{{asset('images/user/' ~ commentaire.auteur.photo)}}" alt="photo de {{commentaire.auteur.pseudo}}">
+            <p>{{commentaire.auteur.pseudo}}</p>
+        </div>
+        <p>Publié le : {{commentaire.publication|date('l j F Y à H:i')}}</p>
+    </div>
+    <p>{{commentaire.contenu}}</p>
+</div>

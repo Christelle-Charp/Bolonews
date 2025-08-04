@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Form\SearchType;
+use App\Entity\Commentaire;
+use App\Form\CommentaireType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -61,12 +64,35 @@ final class AppController extends AbstractController
         ]);
     }
 
-    #[Route('/show/{id}', name: 'article_show')]
-    public function show(Article $article): Response
+    #[Route('/show/{id}', name: 'app_show')]
+    public function show(Article $article, Request $request, EntityManagerInterface $em): Response
     {
+        //J'instancie un nouveau commenataire pour appeller le formulaire de commentaire
+        $commentaire = new Commentaire(); 
+        $commentaire->setArticle($article);
+        $commentaire->setPublication(new \DateTimeImmutable());
+        
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            //Je rajoute l'utilisateur connecté qui est l'auteur
+            $commentaire->setAuteur($this->getUser());
+             //Je mets la requete crée avec les infos du formulaire en file d'attente
+            $em->persist($commentaire);
+            //Je mets à jour la BDD avec la requete qui est en attente
+            $em->flush();
+            //Et je fais mon retour sur la page de l'article avec tous les commentaires
+            return $this->redirectToRoute('app_show', ['id' => $article->getId()]);
+
+        }
+
         //Afficher un article en l'appelant par son id
         return $this->render('app/show.html.twig', [
             'article' => $article,
+            'form' => $form->createView(),
+            'commentaires' => $article->getCommentaires(),
+
         ]);
     }
 }

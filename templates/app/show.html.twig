@@ -33,4 +33,26 @@
             <div class="trait"></div>
         </div>
     </section>
+    {% if app.user %}
+        <section class="commentaires">
+            <div class="row">
+                <h4>Commentaires</h4>
+                <div class="contenair-avis">
+                    {% for commentaire in commentaires %}
+                        {% include "fragment/_cardCommentaire.html.twig" %}
+                    {% endfor %}
+                </div>
+                <div class="form-commentaire">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button class="primary-btn" type="submit">Ajouter</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </section>
+    {% else %}
+        <p><a href="{{ path('app_login') }}">Connectez-vous</a> pour laisser un commentaire.</p>
+    {% endif %}
+    
+    
 {% endblock %}
