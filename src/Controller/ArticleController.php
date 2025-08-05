@@ -58,9 +58,11 @@ final class ArticleController extends AbstractController
                     $this->getParameter('images_directory').'article/',
                     $fileName
                 );
+
+                //On enregistre le nom du fichier dans l'entité Article
+                $article->setImage($fileName);
             };
-            //On enregistre le nom du fichier dans l'entité Article
-            $article->setImage($fileName);
+            
 
             //On enregistre la date et l'heure de la creation:
             $article->setCreation(new \DateTimeImmutable());

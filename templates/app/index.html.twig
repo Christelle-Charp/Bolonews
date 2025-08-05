@@ -24,7 +24,7 @@
                                     <p>{{articleUne.auteur.pseudo}}</p>
                                 </div>
                                 <div class="info-article">
-                                    <p>publié le {{ (articleUne.modification ?? articleUne.creation)|date('d F Y à H\hi') }}</p>
+                                    <p>publié le {{ (articleUne.modification ?? articleUne.creation)|date('d F Y à H\\hi') }}</p>  
                                     <div class="avis">
                                         <div class="commentaire">
                                             {{ ux_icon('ph:chat-circle-dots', {'class': "pictos"}) }}

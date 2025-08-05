@@ -18,7 +18,7 @@ a besoin d'un article-->
                 <p class="sous-titre">{{article.auteur.pseudo}}</p>
             </div>
             <div class="card-date">
-                <p>{{ (article.modification ?? article.creation)|date('d F Y à H\hi') }}</p>
+                <p>{{ (article.modification ?? article.creation)|date('d F Y à H\\hi') }}</p>
             </div>                          
             <p class="chapeau">{{article.chapeau}}</p>
             <div class="cta">
