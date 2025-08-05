@@ -57,8 +57,20 @@
             
         </section>
     {% else %}
-        <p><a href="{{ path('app_login') }}">Connectez-vous</a> pour laisser un commentaire.</p>
+        <div class="container">
+            <div class="row">
+                <p class="invit-connexion">Pour liker ou commenter un article, vous pouvez vous connecter <a href="{{ path('app_login') }}">ICI</a></p>
+            </div>
+        </div>
+        
     {% endif %}
     
     
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }} {# important pour ne pas écraser les scripts hérités #}
+    {% if app.user %}
+        <script src="{{ asset('js/likes.js') }}"></script>
+    {% endif %}
+{% endblock %}
+

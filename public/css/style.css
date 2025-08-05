@@ -299,6 +299,12 @@ header{
     gap: 1rem;
   }
 }
+
+.invit-connexion{
+  font-size: 2rem;
+  text-align: center;
+}
+
 /*Css de la _cardCommentaire*/
 .card-commentaire{
   border: 1px solid black;

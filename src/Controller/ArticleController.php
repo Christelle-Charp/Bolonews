@@ -153,6 +153,32 @@ final class ArticleController extends AbstractController
     {
         //Je récupère l'utilisateur connecté:
         $user = $this->getUser();
+        //Si pas d'utilisateur connecté, je ne fais rien car la route ne peut pas etre déclencher.
+        
+
+        //Je vérifie s'il y a déjà un like qui lie l'article et l'utilisateur
+        if($article->getLikes()->contains($user)){
+            //si oui, je supprime le like
+            $article->removeLike($user);
+        }else{
+            //si non, je crée un like
+            $article->addLike($user);
+        }
+
+        //Je mets la requete crée en file d'attente
+            $em->persist($article);
+            //Je mets à jour la BDD avec la requete qui est en attente
+            $em->flush();
+
+        //Je retourne juste le nombre de like
+        return new Response((string) count($article->getLikes()));
+    }
+
+    /*#[Route('/article/like/{id}', name: 'article_like')]
+    public function like(Article $article, EntityManagerInterface $em) : Response
+    {
+        //Je récupère l'utilisateur connecté:
+        $user = $this->getUser();
         //Si pas d'utilisateur connecté, je ne fais rien.
         if(!$user){
             return $this->redirectToRoute('app_login');
@@ -174,5 +200,5 @@ final class ArticleController extends AbstractController
 
         //Je retourne juste le nombre de like
         return new Response((string) count($article->getLikes()));
-    }
+    }*/
 }
