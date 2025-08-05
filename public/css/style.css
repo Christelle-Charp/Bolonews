@@ -345,3 +345,88 @@ header{
     }
   }
 }
+
+/*Css du formulaire de creation/modification article*/
+.creation-modification-article{
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  form{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .champs{
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .error{
+        color: #F0515A;
+      }
+
+      .message-flash{
+        position: fixed;
+        bottom: 64px;
+        transition: bottom 0.6s ease;
+        z-index: 999;
+        width: 100%;
+        padding: 16px;
+      }
+
+      .succes{
+        background-color: rgb(7, 219, 148);
+        color: green;
+      }
+    }
+
+    .checkbox{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}
+
+/*Css du formulaire de creation de compte*/
+.creation-compte{
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 5rem;
+
+  form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    div{
+      display: flex;
+      gap: 1rem;
+    }
+  }
+}
+
+/*Css du formulaire de login*/
+.se-connecter{
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 5rem;
+
+  form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    div{
+      display: flex;
+      gap: 1rem;
+    }
+  }
+}

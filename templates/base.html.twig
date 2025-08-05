@@ -62,6 +62,34 @@
             <div class="container">
                 <div class="row">
                     {% block body %}{% endblock %}
+                    {% for type, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="message-flash {{ type }}">
+                                {{message}}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    <script>
+                        //au bout de quelques secondes:
+                        setTimeout(() => {
+                            //Je récupere les div que je veux manipuler dans le dom
+                            let flashes = document.querySelectorAll(".message-flash")
+                            //Pour chacun des messages flash
+                            if(flashes){
+                                flashes.forEach(elt=>{
+                                    //Je fais descendre la div
+                                    elt.style.bottom = "-100px";
+                                    //Une fois l'animation terminée
+                                    setTimeout(()=>{
+                                        //Je supprime la div
+                                        elt.remove()
+                                    }, 1000)
+                                    
+                                })
+                            }
+                            
+                        }, 4000);
+                    </script>
                 </div>
             </div>
         </main>

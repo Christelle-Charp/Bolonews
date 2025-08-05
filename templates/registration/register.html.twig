@@ -4,7 +4,8 @@
 
 
 {% block body %}
-    <h1>Register</h1>
+<section class="creation-compte">
+    <h1>Créer votre compte</h1>
 
     {{ form_errors(registrationForm) }}
 
@@ -21,6 +22,8 @@
         })}}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="primary-btn">Enregistrer</button>
     {{ form_end(registrationForm) }}
+</section>
+    
 {% endblock %}
