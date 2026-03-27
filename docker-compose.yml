@@ -1,0 +1,18 @@
+services:
+  bolonews:
+    build: .
+    container_name: bolonews
+    restart: always
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8081:80"
+      - "9000:9000"
+    environment:
+      DATABASE_URL: mysql://bolonews_user:bolonews_Secupass@ccbdd:3306/bolonews
+    networks:
+      - ccbdd_default
+
+networks:
+  ccbdd_default:
+    external: true
