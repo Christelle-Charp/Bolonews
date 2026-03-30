@@ -9,7 +9,7 @@ services:
       - "8081:80"
       - "9000:9000"
     environment:
-      DATABASE_URL: mysql://bolonews_user:bolonews_Secupass@ccbdd:3306/bolonews
+      DATABASE_URL: mysql://utilisateur:mot de passe@ccbdd:3306/bolonews
     networks:
       - ccbdd_default
 
